@@ -149,7 +149,7 @@ function BillsTable() {
         <div
           className="
         w-full
-        max-w-[1900px]
+        max-w-[1800px]
         mx-auto
         px-4
         sm:px-6
@@ -195,7 +195,7 @@ function BillsTable() {
       <div
         className="
       w-full
-      max-w-[1900px]
+      max-w-[1800px]
       mx-auto
       px-3
       sm:px-5
