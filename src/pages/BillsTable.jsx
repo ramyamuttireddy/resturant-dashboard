@@ -17,20 +17,25 @@ function BillsTable() {
   const [toDate, setToDate] = useState("");
 
   useEffect(() => {
-    const loadData = () => {
-      fetch(`${import.meta.env.VITE_API_URL}/excel`)
-        .then((res) => res.json())
-        .then((result) => {
-          setData(result.values || []);
-        })
-        .catch((err) => console.log(err));
+    const loadData = async () => {
+      try {
+        console.log("API URL:", import.meta.env.VITE_API_URL);
+
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/excel`);
+
+        console.log("Status:", res.status);
+
+        const result = await res.json();
+
+        console.log("Result:", result);
+
+        setData(result.values || []);
+      } catch (err) {
+        console.error("Fetch Error:", err);
+      }
     };
 
     loadData();
-
-    const interval = setInterval(loadData, 10000);
-
-    return () => clearInterval(interval);
   }, []);
 
   const headers = data[0] || [];
