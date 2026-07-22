@@ -113,20 +113,18 @@ function LocationCardReport({ rows = [], headers = [] }) {
   return (
     <div
       className="
-grid
-grid-cols-1
-xl:grid-cols-2
-gap-6
-"
+    w-full
+    grid
+    grid-cols-1
+    xl:grid-cols-2
+    gap-4
+    sm:gap-6
+    "
     >
       {locations.map((location) => {
-        // LOCATION FILTER
-
         const locationRows = rows.filter(
           (row) => clean(row[locationIndex]) === clean(location.name),
         );
-
-        // AVAILABLE CARDS
 
         const cards = [
           ...new Map(
@@ -136,17 +134,12 @@ gap-6
 
         const activeCard = selectedCard[location.name] || cards[0];
 
-        // CARD FILTER
-
         const cardRows = locationRows.filter(
           (row) => clean(row[cardIndex]) === clean(activeCard),
         );
 
-        // VENDORS
-
         const vendors = [
           "All Vendors",
-
           ...new Set(cardRows.map((row) => row[vendorIndex]).filter(Boolean)),
         ];
 
@@ -165,41 +158,46 @@ gap-6
           <div
             key={location.name}
             className="
-bg-white
-rounded-3xl
-shadow-xl
-p-6
-border
-border-[#E8D8A8]
-"
+          w-full
+          bg-white
+          rounded-3xl
+          shadow-xl
+          p-4
+          sm:p-6
+          border
+          border-[#E8D8A8]
+          "
           >
             {/* HEADER */}
 
             <div
               className="
-flex
-justify-between
-items-center
-mb-6
-"
+            flex
+            flex-col
+            lg:flex-row
+            justify-between
+            gap-5
+            mb-6
+            "
             >
               <div
                 className="
-flex
-gap-3
-items-center
-"
+              flex
+              gap-3
+              items-center
+              "
               >
                 <div
                   className="
-bg-gradient-to-br
-from-[#728D3E]
-to-[#5F7632]
-text-white
-p-3
-rounded-xl
-shadow-lg
-"
+                bg-gradient-to-br
+                from-[#728D3E]
+                to-[#5F7632]
+                text-white
+                p-3
+                rounded-xl
+                shadow-lg
+                shrink-0
+                "
                 >
                   <CreditCard />
                 </div>
@@ -207,39 +205,55 @@ shadow-lg
                 <div>
                   <h2
                     className="
-text-3xl
-font-bold
-text-[#728D3E]
-"
+                  text-2xl
+                  sm:text-3xl
+                  font-bold
+                  text-[#728D3E]
+                  "
                   >
                     {location.name}
                   </h2>
 
-                  <p className="text-[#5B0E12] font-medium mt-1">
-                    Card :{" "}
-                    <span className="text-[#CD7D1C] font-bold">
+                  <p
+                    className="
+                  text-[#5B0E12]
+                  font-medium
+                  mt-1
+                  text-sm
+                  sm:text-base
+                  "
+                  >
+                    Card :
+                    <span className="text-[#CD7D1C] font-bold ml-1">
                       {activeCard}
                     </span>
                   </p>
                 </div>
               </div>
 
-              {/* FILTERS SIDE BY SIDE */}
+              {/* FILTERS */}
 
               <div
                 className="
-flex
-gap-3
-"
+              flex
+              flex-col
+              sm:flex-row
+              gap-3
+              w-full
+              lg:w-auto
+              "
               >
-                <div>
+                {/* CARD SELECT */}
+
+                <div className="w-full sm:w-auto">
                   <label
                     className="
-text-xs
-text-gray-500
-flex
-gap-1
-"
+                  text-xs
+                  text-gray-500
+                  flex
+                  gap-1
+                  mb-1
+                  "
                   >
                     <CreditCard size={14} />
                     Card
@@ -250,23 +264,24 @@ gap-1
                     onChange={(e) => {
                       setSelectedCard({
                         ...selectedCard,
-
                         [location.name]: e.target.value,
                       });
 
                       setSelectedVendor({
                         ...selectedVendor,
-
                         [location.name]: "All Vendors",
                       });
                     }}
                     className="
-border
-rounded-xl
-px-3
-py-2
-w-36
-"
+                  w-full
+                  sm:w-36
+                  border
+                  rounded-xl
+                  px-3
+                  py-2
+                  text-sm
+                  outline-none
+                  "
                   >
                     {cards.map((card) => (
                       <option key={card}>{card}</option>
@@ -274,14 +289,17 @@ w-36
                   </select>
                 </div>
 
-                <div>
+                {/* VENDOR SELECT */}
+
+                <div className="w-full sm:w-auto">
                   <label
                     className="
-text-xs
-text-gray-500
-flex
-gap-1
-"
+                  text-xs
+                  text-gray-500
+                  flex
+                  gap-1
+                  mb-1
+                  "
                   >
                     <UserRound size={14} />
                     Vendor
@@ -292,17 +310,19 @@ gap-1
                     onChange={(e) =>
                       setSelectedVendor({
                         ...selectedVendor,
-
                         [location.name]: e.target.value,
                       })
                     }
                     className="
-border
-rounded-xl
-px-3
-py-2
-w-36
-"
+                  w-full
+                  sm:w-36
+                  border
+                  rounded-xl
+                  px-3
+                  py-2
+                  text-sm
+                  outline-none
+                  "
                   >
                     {vendors.map((v) => (
                       <option key={v}>{v}</option>
@@ -312,14 +332,15 @@ w-36
               </div>
             </div>
 
-            {/* CARDS */}
+            {/* SUMMARY CARDS */}
 
             <div
               className="
-grid
-grid-cols-2
-gap-4
-"
+            grid
+            grid-cols-1
+            sm:grid-cols-2
+            gap-4
+            "
             >
               <SummaryCard
                 title="This Week"
@@ -366,32 +387,43 @@ function SummaryCard({ title, value, icon }) {
   return (
     <div
       className={`
-bg-gradient-to-br
-${colors[title]}
-rounded-2xl
-p-5
-text-white
-shadow-lg
-hover:-translate-y-1
-transition
-duration-300
-`}
+    bg-gradient-to-br
+    ${colors[title]}
+    rounded-2xl
+    p-4
+    sm:p-5
+    text-white
+    shadow-lg
+    hover:-translate-y-1
+    transition
+    duration-300
+    `}
     >
       <div
         className="
-flex
-justify-between
-items-center
-"
+      flex
+      justify-between
+      items-center
+      gap-3
+      "
       >
-        <p className="text-sm opacity-90">{title}</p>
+        <p
+          className="
+        text-sm
+        sm:text-base
+        opacity-90
+        "
+        >
+          {title}
+        </p>
 
         <div
           className="
-bg-white/20
-rounded-lg
-p-2
-"
+        bg-white/20
+        rounded-lg
+        p-2
+        shrink-0
+        "
         >
           {icon}
         </div>
@@ -399,10 +431,12 @@ p-2
 
       <h2
         className="
-text-2xl
-font-bold
-mt-4
-"
+      text-xl
+      sm:text-2xl
+      font-bold
+      mt-4
+      break-all
+      "
       >
         ₹ {value.toLocaleString()}
       </h2>

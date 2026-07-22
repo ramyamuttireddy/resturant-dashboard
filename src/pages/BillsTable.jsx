@@ -132,14 +132,48 @@ function BillsTable() {
     );
   });
 
-  return (
-    <div className="min-h-screen bg-[#F7F6EF]">
-      {/* Header */}
+  const resetFilters = () => {
+    setSearch("");
+    setVendor("All Vendors");
+    setCardUsed("All Cards");
+    setLocation("All Locations");
+    setBillBy("All Billers");
+    setFromDate("");
+    setToDate("");
+  };
 
-      <div className="bg-gradient-to-r from-[#6F8F3D] to-[#D28A28] shadow-xl">
-        <div className="max-w-7xl mx-auto px-8 py-6 flex justify-between items-center">
+  return (
+    <div className="min-h-screen bg-[#F7F6EF] overflow-x-hidden">
+      {/* HEADER */}
+      <div className="bg-gradient-to-r from-[#6F8F3D] to-[#D28A28] shadow-xl w-full">
+        <div
+          className="
+        w-full
+        max-w-[1900px]
+        mx-auto
+        px-4
+        sm:px-6
+        lg:px-8
+        py-5
+        flex
+        flex-col
+        md:flex-row
+        justify-between
+        items-start
+        md:items-center
+        gap-4
+        "
+        >
           <div>
-            <h1 className="text-4xl font-bold text-white tracking-wide">
+            <h1
+              className="
+          text-2xl
+          sm:text-3xl
+          lg:text-4xl
+          font-bold
+          text-white
+          "
+            >
               Bharat Bhavan
             </h1>
 
@@ -148,7 +182,7 @@ function BillsTable() {
             </p>
           </div>
 
-          <div className="text-right">
+          <div className="text-left md:text-right">
             <p className="text-white font-semibold">BB Bills Dashboard</p>
 
             <p className="text-[#FDF7E8] text-sm">Finance Department</p>
@@ -156,38 +190,94 @@ function BillsTable() {
         </div>
       </div>
 
-      <div className="max-w-10xl mx-auto px-8 mt-8">
-        {/* Reports */}
+      {/* MAIN */}
 
-        <div className="mb-8">
+      <div
+        className="
+      w-full
+      max-w-[1900px]
+      mx-auto
+      px-3
+      sm:px-5
+      lg:px-8
+      mt-6
+      "
+      >
+        {/* REPORTS */}
+
+        <div className="mb-8 w-full">
           <Reports rows={rows} headers={headers} />
         </div>
 
-        {/* Filters */}
+        {/* FILTER BOX */}
 
         <div
           className="
-bg-white
-rounded-3xl
-shadow-xl
-border
-border-[#D6C68C]
-p-6
-mb-8
-"
+        w-full
+        bg-white
+        rounded-3xl
+        shadow-xl
+        border
+        border-[#D6C68A]
+        p-4
+        sm:p-6
+        mb-8
+        "
         >
-          <h2
+          <div
             className="
-text-2xl
-font-bold
-text-[#6F8F3D]
-mb-6
-"
+  flex
+  justify-between
+  items-center
+  mb-5
+  "
           >
-            Filter Bills
-          </h2>
+            <h2
+              className="
+    text-xl
+    sm:text-2xl
+    font-bold
+    text-[#6F8F3D]
+    "
+            >
+              Filter Bills
+            </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-6 gap-5">
+            <button
+              onClick={resetFilters}
+              className="
+    bg-gradient-to-r
+    from-[#CD7D1C]
+    to-[#A85F0A]
+    text-white
+    px-5
+    py-2.5
+    rounded-xl
+    font-semibold
+    text-sm
+    shadow-md
+    hover:shadow-lg
+    hover:scale-105
+    transition
+    duration-300
+    "
+            >
+              Reset Filters
+            </button>
+          </div>
+
+          <div
+            className="
+          grid
+          grid-cols-1
+          sm:grid-cols-2
+          lg:grid-cols-3
+          xl:grid-cols-6
+          gap-4
+          "
+          >
+            {/* FROM DATE */}
+
             <div>
               <label className="block text-sm font-semibold text-[#556B2F] mb-2">
                 From Date
@@ -198,18 +288,18 @@ mb-6
                 value={fromDate}
                 onChange={(e) => setFromDate(e.target.value)}
                 className="
-w-full
-rounded-xl
-border
-border-[#6F8F3D]
-bg-[#FCFCF6]
-p-3
-outline-none
-focus:ring-2
-focus:ring-[#D28A28]
-"
+              w-full
+              rounded-xl
+              border
+              border-[#6F8F3D]
+              bg-[#FCFCF6]
+              p-3
+              text-sm
+              "
               />
             </div>
+
+            {/* TO DATE */}
 
             <div>
               <label className="block text-sm font-semibold text-[#556B2F] mb-2">
@@ -221,18 +311,18 @@ focus:ring-[#D28A28]
                 value={toDate}
                 onChange={(e) => setToDate(e.target.value)}
                 className="
-w-full
-rounded-xl
-border
-border-[#6F8F3D]
-bg-[#FCFCF6]
-p-3
-outline-none
-focus:ring-2
-focus:ring-[#D28A28]
-"
+              w-full
+              rounded-xl
+              border
+              border-[#6F8F3D]
+              bg-[#FCFCF6]
+              p-3
+              text-sm
+              "
               />
             </div>
+
+            {/* VENDOR */}
 
             <div>
               <label className="block text-sm font-semibold text-[#556B2F] mb-2">
@@ -243,22 +333,22 @@ focus:ring-[#D28A28]
                 value={vendor}
                 onChange={(e) => setVendor(e.target.value)}
                 className="
-w-full
-rounded-xl
-border
-border-[#6F8F3D]
-bg-[#FCFCF6]
-p-3
-outline-none
-focus:ring-2
-focus:ring-[#D28A28]
-"
+              w-full
+              rounded-xl
+              border
+              border-[#6F8F3D]
+              bg-[#FCFCF6]
+              p-3
+              text-sm
+              "
               >
                 {vendors.map((item, index) => (
                   <option key={index}>{item}</option>
                 ))}
               </select>
             </div>
+
+            {/* CARD */}
 
             <div>
               <label className="block text-sm font-semibold text-[#556B2F] mb-2">
@@ -269,22 +359,22 @@ focus:ring-[#D28A28]
                 value={cardUsed}
                 onChange={(e) => setCardUsed(e.target.value)}
                 className="
-w-full
-rounded-xl
-border
-border-[#6F8F3D]
-bg-[#FCFCF6]
-p-3
-outline-none
-focus:ring-2
-focus:ring-[#D28A28]
-"
+              w-full
+              rounded-xl
+              border
+              border-[#6F8F3D]
+              bg-[#FCFCF6]
+              p-3
+              text-sm
+              "
               >
                 {cards.map((item, index) => (
                   <option key={index}>{item}</option>
                 ))}
               </select>
             </div>
+
+            {/* LOCATION */}
 
             <div>
               <label className="block text-sm font-semibold text-[#556B2F] mb-2">
@@ -295,22 +385,22 @@ focus:ring-[#D28A28]
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
                 className="
-w-full
-rounded-xl
-border
-border-[#6F8F3D]
-bg-[#FCFCF6]
-p-3
-outline-none
-focus:ring-2
-focus:ring-[#D28A28]
-"
+              w-full
+              rounded-xl
+              border
+              border-[#6F8F3D]
+              bg-[#FCFCF6]
+              p-3
+              text-sm
+              "
               >
                 {locations.map((item, index) => (
                   <option key={index}>{item}</option>
                 ))}
               </select>
             </div>
+
+            {/* BILL BY */}
 
             <div>
               <label className="block text-sm font-semibold text-[#556B2F] mb-2">
@@ -321,16 +411,14 @@ focus:ring-[#D28A28]
                 value={billBy}
                 onChange={(e) => setBillBy(e.target.value)}
                 className="
-w-full
-rounded-xl
-border
-border-[#6F8F3D]
-bg-[#FCFCF6]
-p-3
-outline-none
-focus:ring-2
-focus:ring-[#D28A28]
-"
+              w-full
+              rounded-xl
+              border
+              border-[#6F8F3D]
+              bg-[#FCFCF6]
+              p-3
+              text-sm
+              "
               >
                 {billers.map((item, index) => (
                   <option key={index}>{item}</option>
@@ -340,66 +428,82 @@ focus:ring-[#D28A28]
           </div>
         </div>
 
-        {/* Table */}
+        {/* TABLE ONLY SCROLL */}
 
         <div
           className="
-bg-white
-rounded-3xl
-shadow-xl
-overflow-hidden
-border
-border-[#D6C68C]
-"
+        w-full
+        bg-white
+        rounded-3xl
+        shadow-xl
+        border
+        border-[#D6C68A]
+        "
         >
-          <table className="w-full">
-            <thead className="bg-gradient-to-r from-[#6F8F3D] to-[#D28A28] text-white">
-              <tr>
-                {headers.map((head, index) => (
-                  <th
-                    key={index}
-                    className="
-px-6
-py-5
-text-left
-font-semibold
-tracking-wide
-"
-                  >
-                    {head}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-
-            <tbody>
-              {filteredRows.map((row, index) => (
-                <tr
-                  key={index}
-                  className="
-border-b
-border-[#ECE6C8]
-hover:bg-[#FFF8EB]
-transition
-duration-200
-"
-                >
-                  {row.map((cell, i) => (
-                    <td
-                      key={i}
+          <div className="overflow-x-auto">
+            <table
+              className="
+            min-w-[1200px]
+            w-full
+            "
+            >
+              <thead
+                className="
+              bg-gradient-to-r
+              from-[#6F8F3D]
+              to-[#D28A28]
+              text-white
+              "
+              >
+                <tr>
+                  {headers.map((head, index) => (
+                    <th
+                      key={index}
                       className="
-px-6
-py-4
-text-gray-700
-"
+                      px-5
+                      py-4
+                      text-left
+                      text-sm
+                      font-semibold
+                      whitespace-nowrap
+                      "
                     >
-                      {cell}
-                    </td>
+                      {head}
+                    </th>
                   ))}
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+
+              <tbody>
+                {filteredRows.map((row, index) => (
+                  <tr
+                    key={index}
+                    className="
+                    border-b
+                    border-[#ECE6C8]
+                    hover:bg-[#FFF8EB]
+                    "
+                  >
+                    {row.map((cell, i) => (
+                      <td
+                        key={i}
+                        title={cell}
+                        className="
+                          px-5
+                          py-3
+                          text-sm
+                          text-gray-700
+                          whitespace-nowrap
+                          "
+                      >
+                        {cell}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

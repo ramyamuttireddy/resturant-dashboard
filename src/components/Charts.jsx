@@ -135,190 +135,253 @@ function Charts({ rows = [], headers = [] }) {
   ];
 
   return (
-    <div className="space-y-8">
-      {/* TOP 3 */}
+    <div className="space-y-8 w-full overflow-hidden">
+      {/* TOP CHARTS */}
 
       <div
         className="
-grid
-grid-cols-1
-lg:grid-cols-3
-gap-6
-"
+      grid
+      grid-cols-1
+      md:grid-cols-2
+      xl:grid-cols-3
+      gap-6
+      "
       >
         {/* WEEKLY */}
 
         <div
           className="
-bg-white
-rounded-3xl
-shadow-xl
-p-6
-border
-border-[#728D3E]/30
-"
+        bg-white
+        rounded-3xl
+        shadow-xl
+        p-5
+        xl:p-8
+        border
+        border-[#728D3E]/30
+        "
         >
           <h2
             className="
-text-xl
-font-bold
-text-[#5B0E12]
-mb-5
-"
+          text-xl
+          xl:text-2xl
+          font-bold
+          text-[#5B0E12]
+          mb-6
+          "
           >
             Weekly Spending
           </h2>
 
-          <ResponsiveContainer width="100%" height={320}>
-            <BarChart data={weeklyData}>
-              <CartesianGrid strokeDasharray="3 3" />
+          <div className="w-full h-[300px] xl:h-[380px]">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={weeklyData}>
+                <CartesianGrid strokeDasharray="3 3" />
 
-              <XAxis dataKey="name" />
+                <XAxis
+                  dataKey="name"
+                  tick={{
+                    fontSize: 14,
+                  }}
+                />
 
-              <YAxis />
+                <YAxis
+                  tick={{
+                    fontSize: 14,
+                  }}
+                />
 
-              <Tooltip />
+                <Tooltip />
 
-              <Legend />
+                <Legend
+                  wrapperStyle={{
+                    fontSize: "14px",
+                  }}
+                />
 
-              <Bar dataKey="amount" fill="#728D3E" radius={[8, 8, 0, 0]} />
-            </BarChart>
-          </ResponsiveContainer>
+                <Bar dataKey="amount" fill="#728D3E" radius={[10, 10, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
         </div>
 
-        {/* CARD */}
+        {/* CARD PIE */}
 
         <div
           className="
-bg-white
-rounded-3xl
-shadow-xl
-p-6
-border
-border-[#CD7D1C]/30
-"
+        bg-white
+        rounded-3xl
+        shadow-xl
+        p-5
+        xl:p-8
+        border
+        border-[#CD7D1C]/30
+        "
         >
           <h2
             className="
-text-xl
-font-bold
-text-[#5B0E12]
-mb-5
-"
+          text-xl
+          xl:text-2xl
+          font-bold
+          text-[#5B0E12]
+          mb-6
+          "
           >
             Card Wise Spending
           </h2>
 
-          <ResponsiveContainer width="100%" height={320}>
-            <PieChart>
-              <Pie
-                data={cardData}
-                dataKey="value"
-                nameKey="name"
-                outerRadius={110}
-                label
-              >
-                {cardData.map((item, index) => (
-                  <Cell
-                    key={index}
-                    fill={["#728D3E", "#CD7D1C", "#5B0E12"][index % 3]}
-                  />
-                ))}
-              </Pie>
+          <div className="w-full h-[300px] xl:h-[380px]">
+            <ResponsiveContainer width="100%" height="100%">
+              <PieChart>
+                <Pie
+                  data={cardData}
+                  dataKey="value"
+                  nameKey="name"
+                  outerRadius={120}
+                  label
+                >
+                  {cardData.map((item, index) => (
+                    <Cell
+                      key={index}
+                      fill={["#728D3E", "#CD7D1C", "#5B0E12"][index % 3]}
+                    />
+                  ))}
+                </Pie>
 
-              <Tooltip />
+                <Tooltip />
 
-              <Legend />
-            </PieChart>
-          </ResponsiveContainer>
+                <Legend
+                  wrapperStyle={{
+                    fontSize: "14px",
+                  }}
+                />
+              </PieChart>
+            </ResponsiveContainer>
+          </div>
         </div>
 
         {/* LOCATION */}
 
         <div
           className="
-bg-white
-rounded-3xl
-shadow-xl
-p-6
-border
-border-[#728D3E]/30
-"
+        bg-white
+        rounded-3xl
+        shadow-xl
+        p-5
+        xl:p-8
+        border
+        border-[#728D3E]/30
+        "
         >
           <h2
             className="
-text-xl
-font-bold
-text-[#5B0E12]
-mb-5
-"
+          text-xl
+          xl:text-2xl
+          font-bold
+          text-[#5B0E12]
+          mb-6
+          "
           >
             Location Wise Spending
           </h2>
 
-          <ResponsiveContainer width="100%" height={320}>
-            <BarChart data={locationData}>
-              <CartesianGrid strokeDasharray="3 3" />
+          <div className="w-full h-[300px] xl:h-[380px]">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={locationData}>
+                <CartesianGrid strokeDasharray="3 3" />
 
-              <XAxis dataKey="name" />
+                <XAxis
+                  dataKey="name"
+                  tick={{
+                    fontSize: 14,
+                  }}
+                />
 
-              <YAxis />
+                <YAxis
+                  tick={{
+                    fontSize: 14,
+                  }}
+                />
 
-              <Tooltip />
+                <Tooltip />
 
-              <Legend />
+                <Legend
+                  wrapperStyle={{
+                    fontSize: "14px",
+                  }}
+                />
 
-              <Bar dataKey="value" radius={[8, 8, 0, 0]}>
-                {locationData.map((item, index) => (
-                  <Cell
-                    key={index}
-                    fill={locationColors[index % locationColors.length]}
-                  />
-                ))}
-              </Bar>
-            </BarChart>
-          </ResponsiveContainer>
+                <Bar dataKey="value" radius={[10, 10, 0, 0]}>
+                  {locationData.map((item, index) => (
+                    <Cell
+                      key={index}
+                      fill={locationColors[index % locationColors.length]}
+                    />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
         </div>
       </div>
 
-      {/* VENDOR ONLY */}
+      {/* VENDOR CHART */}
 
       <div
         className="
-bg-white
-rounded-3xl
-shadow-xl
-p-6
-border
-border-[#CD7D1C]/30
-"
+      bg-white
+      rounded-3xl
+      shadow-xl
+      p-5
+      xl:p-8
+      border
+      border-[#CD7D1C]/30
+      "
       >
         <h2
           className="
-text-2xl
-font-bold
-text-[#5B0E12]
-mb-5
-"
+      text-2xl
+      xl:text-3xl
+      font-bold
+      text-[#5B0E12]
+      mb-6
+      "
         >
           Vendor Spending
         </h2>
 
-        <ResponsiveContainer width="100%" height={450}>
-          <BarChart data={vendorData}>
-            <CartesianGrid strokeDasharray="3 3" />
+        <div className="w-full h-[400px] xl:h-[520px]">
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart data={vendorData}>
+              <CartesianGrid strokeDasharray="3 3" />
 
-            <XAxis dataKey="name" angle={-25} textAnchor="end" height={120} />
+              <XAxis
+                dataKey="name"
+                angle={-25}
+                textAnchor="end"
+                height={120}
+                tick={{
+                  fontSize: 14,
+                }}
+              />
 
-            <YAxis />
+              <YAxis
+                tick={{
+                  fontSize: 14,
+                }}
+              />
 
-            <Tooltip />
+              <Tooltip />
 
-            <Legend />
+              <Legend
+                wrapperStyle={{
+                  fontSize: "15px",
+                }}
+              />
 
-            <Bar dataKey="amount" fill="#CD7D1C" radius={[10, 10, 0, 0]} />
-          </BarChart>
-        </ResponsiveContainer>
+              <Bar dataKey="amount" fill="#CD7D1C" radius={[12, 12, 0, 0]} />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
       </div>
     </div>
   );
